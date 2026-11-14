@@ -1,0 +1,10 @@
+[
+  {
+    "id": "hdmi-gender-c",
+    "lockerId": "A1",
+    "name": "HDMI 젠더",
+    "spec": "C타입",
+    "total": 3,
+    "available": 3
+  }
+]
