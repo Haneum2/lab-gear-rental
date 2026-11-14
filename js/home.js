@@ -41,7 +41,8 @@ export function renderHome() {
   const equipment = getEquipment(locker.id);
 
   // QR 스캔 영역
-  const video = h('video', { className: 'scan-video', muted: true, playsInline: true });
+  const video = h('video', { className: 'scan-video', muted: true, autoplay: true });
+  video.setAttribute('playsinline', ''); // 아이폰에서 전체 화면으로 넘어가지 않게 한다
   const cancel = h('button', { className: 'btn btn-secondary', type: 'button' }, '스캔 취소하고 코드 입력');
   const scanBox = h('div', { className: 'panel', hidden: true },
     h('p', {}, '보관함의 QR 코드를 화면에 비춰 주세요.'),
@@ -105,7 +106,7 @@ export function renderHome() {
       });
     } catch (err) {
       showManual(err.message === 'unsupported'
-        ? '이 브라우저는 QR 스캔을 지원하지 않습니다. 보관함에 적힌 코드를 입력해 주세요.'
+        ? '이 브라우저에서는 카메라를 쓸 수 없습니다. 보관함에 적힌 코드를 입력해 주세요.'
         : '카메라를 사용할 수 없습니다. 카메라 권한을 허용하거나 보관함에 적힌 코드를 입력해 주세요.');
     } finally {
       qrButton.disabled = false;

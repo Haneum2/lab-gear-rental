@@ -75,6 +75,11 @@ const { lockerIdFromQr } = await import('../js/qr.js');
 assert.equal(lockerIdFromQr('https://example.github.io/lab-gear-rental/?locker=A1#/home'), 'A1');
 assert.equal(lockerIdFromQr(' A1 '), 'A1', 'ID만 적힌 QR도 읽음');
 
+// 넣어 둔 jsQR 파일이 불러와지고, QR이 없는 화면에서는 null을 돌려준다
+const { createRequire } = await import('node:module');
+const jsQR = createRequire(import.meta.url)('../js/vendor/jsQR.js');
+assert.equal(jsQR(new Uint8ClampedArray(64 * 64 * 4).fill(255), 64, 64), null);
+
 // 학번 형식
 const { cleanStudentId, checkStudentId, maskStudentId } = await import('../js/student-id.js');
 assert.equal(cleanStudentId(' 2026-12 34 '), '20261234');
